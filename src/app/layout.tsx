@@ -49,9 +49,10 @@ export const metadata: Metadata = {
   },
 };
 
-/* Theme init: runs before paint so there's no flash of the wrong theme.
-   Follows system preference by default, then honors a stored choice. */
-const themeInit = `(function(){try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light"){document.documentElement.classList.add(t);}else{document.documentElement.classList.add(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}}catch(e){document.documentElement.classList.add("light");}})();`;
+/* Pre-paint init: mark JS availability (scopes .reveal animations) and
+   apply the theme — system preference by default, stored choice wins —
+   so there's no flash of the wrong theme or hidden-forever content. */
+const themeInit = `(function(){var d=document.documentElement;d.classList.add("js");var s="light";try{if(window.matchMedia("(prefers-color-scheme: dark)").matches)s="dark";}catch(e){}try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")s=t;}catch(e){}d.classList.add(s);})();`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (

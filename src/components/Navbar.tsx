@@ -39,13 +39,13 @@ export default function Navbar() {
             {personalInfo.preferredName}
             <span className="text-accent">.</span>
           </span>
-          <span className="hidden font-mono text-[11px] uppercase tracking-widest text-muted-foreground transition-colors group-hover:text-accent sm:inline">
+          <span className="hidden whitespace-nowrap font-mono text-[11px] uppercase tracking-widest text-muted-foreground transition-colors group-hover:text-accent lg:inline">
             {personalInfo.role}
           </span>
         </Link>
 
         {/* Desktop links */}
-        <ul className="hidden items-center gap-1 md:flex">
+        <ul className="hidden items-center gap-1 whitespace-nowrap md:flex">
           {navItems.map((item) => (
             <li key={item.href}>
               <a

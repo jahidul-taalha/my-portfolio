@@ -236,7 +236,7 @@ export const experience: ExperienceItem = {
   role: "Private Tutor / Academic Tutor",
   context: "Private tutoring · 4+ years",
   summary:
-    "Teaching experience kept separate from my software development work — no software employment history is claimed here.",
+    "Academic tutoring role — listed separately from my software development work.",
   points: [
     "4+ years of tutoring experience",
     "Teaching Bangla and English-medium students",

@@ -13,7 +13,7 @@ export default function Experience() {
       index="04"
       label="Experience"
       title="Teaching experience"
-      lede="Years of tutoring that shaped how I communicate and break down complex ideas."
+      lede="Academic tutoring — kept separate from my software development work."
     >
       <Reveal>
         <article className="relative rounded-2xl border border-border bg-surface p-6 sm:p-8">
