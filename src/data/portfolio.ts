@@ -10,7 +10,7 @@
  * real URL string and the link turns on automatically.
  */
 
-/** External project link. `null` = placeholder → disabled "Coming soon" button. */
+/** External link. `null` = placeholder → disabled "Coming soon" button. */
 export type LinkHref = string | null;
 
 export interface NavItem {
@@ -19,7 +19,7 @@ export interface NavItem {
 }
 
 export interface PersonalInfo {
-  /** TODO: replace with the real deployed domain (used for Open Graph URLs). */
+  /** Deployed domain — used for metadataBase, canonical, OG and sitemap URLs. */
   siteUrl: string;
   fullName: string;
   preferredName: string;
@@ -30,15 +30,23 @@ export interface PersonalInfo {
   photo: string;
   photoAlt: string;
   email: string;
+  /** Display format; the tel: link strips formatting automatically. */
   phone: string;
+  whatsapp: string;
   github: string;
   linkedin: string;
-  /** TODO: replace `null` with "/resume.pdf" once the file is added to /public */
-  resume: LinkHref;
+  /** Google Drive — opens in the browser. */
+  resumeView: string;
+  /** Google Drive direct download. */
+  resumeDownload: string;
 }
 
 export interface AboutContent {
-  paragraphs: string[];
+  /** TODO: replace with your real "how I started programming" story. */
+  journey: string;
+  enjoyBuilding: string;
+  /** TODO: replace with your real hobbies and interests. */
+  beyondCode: string;
   /** Quick-facts shown beside the copy (label/value pairs). */
   facts: { label: string; value: string }[];
 }
@@ -49,18 +57,25 @@ export interface SkillGroup {
 }
 
 export interface Project {
-  id: string;
+  /** URL segment: /projects/[slug] */
+  slug: string;
   title: string;
+  /** One-liner used on cards and in metadata. */
+  shortDescription: string;
+  /** Longer copy for the detail page. */
   description: string;
-  tech: string[];
-  /** Omit features when none were provided (kept empty for FitLog). */
+  /** Screenshot path — rendered only if the file exists in public/projects/. */
+  image: string;
+  techStack: string[];
   features: string[];
-  /** Optional note shown when there is no feature list (FitLog). */
-  note?: string;
   /** TODO: replace `null` with the live demo URL */
-  live: LinkHref;
-  /** TODO: replace `null` with the GitHub repo URL */
-  repo: LinkHref;
+  liveUrl: LinkHref;
+  /** Client-side GitHub repo. TODO: replace `null` with the repo URL */
+  githubClientUrl: LinkHref;
+  /** TODO: write real challenge list items (placeholders below). */
+  challenges: string[];
+  /** TODO: write real improvement ideas (placeholders below). */
+  futureImprovements: string[];
 }
 
 export interface ExperienceItem {
@@ -77,16 +92,16 @@ export interface EducationItem {
 }
 
 /* ------------------------------------------------------------------ */
-/* Navigation                                                         */
+/* Navigation — "/#section" so links work from any page               */
 /* ------------------------------------------------------------------ */
 
 export const navItems: NavItem[] = [
-  { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
-  { label: "Experience", href: "#experience" },
-  { label: "Education", href: "#education" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "/#about" },
+  { label: "Skills", href: "/#skills" },
+  { label: "Projects", href: "/#projects" },
+  { label: "Experience", href: "/#experience" },
+  { label: "Education", href: "/#education" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -94,8 +109,7 @@ export const navItems: NavItem[] = [
 /* ------------------------------------------------------------------ */
 
 export const personalInfo: PersonalInfo = {
-  // TODO: replace with your real domain once deployed (e.g. "https://example.com")
-  siteUrl: "https://example.com",
+  siteUrl: "https://jahidul-taalha-portfolio.vercel.app",
   fullName: "MD. JAHIDUL ISLAM",
   preferredName: "Taalha",
   location: "Sylhet, Bangladesh",
@@ -106,25 +120,30 @@ export const personalInfo: PersonalInfo = {
     "I build responsive, modern web applications with React.js and Next.js on the frontend, and Node.js, Express.js, and MongoDB on the backend. I'm currently pursuing a Diploma in Computer Science & Technology and enjoy turning ideas into practical, user-friendly products.",
   photo: "/hero-profile.jpeg",
   photoAlt: "Portrait of MD. Jahidul Islam (Taalha), Full Stack Web Developer",
-  // TODO: replace with your real email address
-  email: "your-email@example.com",
-  // TODO: replace with your real phone number
-  phone: "+880 XXXX-XXXXXX",
+  email: "jahidulislamtaalha@gmail.com",
+  phone: "+880 1577-553497",
+  whatsapp: "https://wa.me/8801577553497",
   github: "https://github.com/jahidul-taalha",
   linkedin: "https://www.linkedin.com/in/md-jahidul-islam-742971304/",
-  // TODO: replace null with "/resume.pdf"
-  resume: null,
+  resumeView:
+    "https://drive.google.com/file/d/1RXWwLlF3e0hwvm4_Nf5IBG9BcLom5FkI/view?usp=sharing",
+  resumeDownload:
+    "https://drive.google.com/uc?export=download&id=1RXWwLlF3e0hwvm4_Nf5IBG9BcLom5FkI",
 };
 
 /* ------------------------------------------------------------------ */
-/* About                                                              */
+/* About — three parts: journey / enjoy building / beyond code        */
 /* ------------------------------------------------------------------ */
 
 export const aboutContent: AboutContent = {
-  paragraphs: [
-    "I am an aspiring developer passionate about creating modern, responsive, and user-friendly web applications. I enjoy transforming ideas and designs into functional digital experiences using React.js and Next.js, and I build the backend side with Node.js, Express.js, and MongoDB.",
-    "I believe in continuous learning, practical problem-solving, and building projects that solve real-world problems. Alongside my studies, four years of tutoring have sharpened my communication and explanation skills — I use those skills every day to break down complex topics and ship clean, understandable code.",
-  ],
+  // TODO: write your own story of how you started programming.
+  journey:
+    "TODO: Replace this with your story — how you got into programming, what you learned first, and the moment you decided to pursue it seriously.",
+  enjoyBuilding:
+    "I enjoy building modern, responsive web applications and full-stack projects with React.js and Next.js on the frontend, and Node.js, Express.js, and MongoDB on the backend. Turning an idea or a design into a working, user-friendly product is the part I enjoy most — and I care about clean code, sensible UX, and shipping things that solve real problems.",
+  // TODO: write your own hobbies and interests outside of coding.
+  beyondCode:
+    "TODO: Replace this with your hobbies and interests outside of code — what you do to recharge, what you're curious about, anything that shows the person behind the projects.",
   facts: [
     { label: "Based in", value: "Sylhet, Bangladesh" },
     { label: "Focus", value: "React.js · Next.js · Node.js" },
@@ -161,16 +180,19 @@ export const skillGroups: SkillGroup[] = [
 ];
 
 /* ------------------------------------------------------------------ */
-/* Featured projects                                                  */
+/* Featured projects                                                   */
 /* ------------------------------------------------------------------ */
 
 export const projects: Project[] = [
   {
-    id: "hireloop",
+    slug: "hireloop",
     title: "Hireloop",
-    description:
+    shortDescription:
       "A full-stack job portal connecting job seekers and recruiters.",
-    tech: ["Next.js", "Express.js", "MongoDB", "Better Auth"],
+    description:
+      "A full-stack job portal connecting job seekers and recruiters. Hireloop gives each type of user — job seeker, recruiter, and admin — the tools they need, behind role-based authentication.",
+    image: "/projects/hireloop.png",
+    techStack: ["Next.js", "Express.js", "MongoDB", "Better Auth"],
     features: [
       "Role-based authentication",
       "Job seeker and recruiter dashboards",
@@ -178,55 +200,101 @@ export const projects: Project[] = [
       "Admin access management",
     ],
     // TODO: replace null with the live demo URL
-    live: null,
-    // TODO: replace null with the GitHub repo URL
-    repo: null,
+    liveUrl: null,
+    // TODO: replace null with the client GitHub repo URL
+    githubClientUrl: null,
+    challenges: [
+      // TODO: replace with your real challenges building Hireloop
+      "TODO: Describe a real challenge you faced while building Hireloop (e.g. auth flows, role permissions, data modelling).",
+    ],
+    futureImprovements: [
+      // TODO: replace with your real plans for Hireloop
+      "TODO: Describe your real future plans for Hireloop (e.g. features, integrations, deployments).",
+    ],
   },
   {
-    id: "bazar-dor",
+    slug: "bazar-dor",
     title: "Bazar Dor",
-    description: "A Bangla-based product price information platform.",
-    tech: ["Next.js", "JavaScript", "Tailwind CSS", "REST APIs"],
+    shortDescription: "A Bangla-based product price information platform.",
+    description:
+      "A Bangla-based product price information platform. Bazar Dor lets people browse product categories, check current prices, and follow price history so they can make better buying decisions.",
+    image: "/projects/bazar-dor.png",
+    techStack: ["Next.js", "JavaScript", "Tailwind CSS", "REST APIs"],
     features: [
       "Product categories and listings",
       "Product details",
       "Price history and comparisons",
       "Price increase and decrease information",
     ],
-    live: "https://bazar-com-seven.vercel.app/",
-    // TODO: replace null with the GitHub repo URL
-    repo: null,
+    liveUrl: "https://bazar-com-seven.vercel.app/",
+    // TODO: replace null with the client GitHub repo URL
+    githubClientUrl: null,
+    challenges: [
+      // TODO: replace with your real challenges building Bazar Dor
+      "TODO: Describe a real challenge you faced while building Bazar Dor (e.g. Bangla content, price data sourcing, comparisons).",
+    ],
+    futureImprovements: [
+      // TODO: replace with your real plans for Bazar Dor
+      "TODO: Describe your real future plans for Bazar Dor (e.g. more categories, alerts, user accounts).",
+    ],
   },
   {
-    id: "booknook",
+    slug: "booknook",
     title: "BookNook",
-    description: "An online library management application.",
-    tech: ["Next.js", "Express.js", "MongoDB"],
+    shortDescription: "An online library management application.",
+    description:
+      "An online library management application. BookNook covers the core library workflow — browsing the catalogue, adding books, borrowing, and returning — end to end.",
+    image: "/projects/booknook.png",
+    techStack: ["Next.js", "Express.js", "MongoDB"],
     features: [
       "Browse available books",
       "Add new books",
       "Borrow books",
       "Manage and return borrowed books",
     ],
-    live: "https://book-nook-client-six.vercel.app/",
-    // TODO: replace null with the GitHub repo URL
-    repo: null,
+    liveUrl: "https://book-nook-client-six.vercel.app/",
+    // TODO: replace null with the client GitHub repo URL
+    githubClientUrl: null,
+    challenges: [
+      // TODO: replace with your real challenges building BookNook
+      "TODO: Describe a real challenge you faced while building BookNook (e.g. borrow/return state, availability rules, API design).",
+    ],
+    futureImprovements: [
+      // TODO: replace with your real plans for BookNook
+      "TODO: Describe your real future plans for BookNook (e.g. search, due dates, member accounts).",
+    ],
   },
   {
-    id: "fitlog",
+    slug: "fitlog",
     title: "FitLog",
+    shortDescription:
+      "A fitness tracking web application developed as a practical project.",
     description:
       "A fitness tracking web application developed as a practical project.",
-    tech: [],
+    image: "/projects/fitlog.png",
+    // TODO: add the real tech stack for FitLog once finalized
+    techStack: [],
+    // TODO: add the real feature list for FitLog once finalized
     features: [],
-    // Tech-agnostic note: no stack or feature list was provided for this one.
-    note: "Details and feature list to be added once finalized.",
     // TODO: replace null with the live demo URL
-    live: null,
-    // TODO: replace null with the GitHub repo URL
-    repo: null,
+    liveUrl: null,
+    // TODO: replace null with the client GitHub repo URL
+    githubClientUrl: null,
+    challenges: [
+      // TODO: replace with your real challenges building FitLog
+      "TODO: Describe a real challenge you faced while building FitLog.",
+    ],
+    futureImprovements: [
+      // TODO: replace with your real plans for FitLog
+      "TODO: Describe your real future plans for FitLog.",
+    ],
   },
 ];
+
+/** Look up a project by its URL slug (used by the dynamic route). */
+export function getProjectBySlug(slug: string): Project | undefined {
+  return projects.find((project) => project.slug === slug);
+}
 
 /* ------------------------------------------------------------------ */
 /* Experience (academic tutoring — not software employment)           */

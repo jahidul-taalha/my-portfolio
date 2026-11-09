@@ -14,7 +14,7 @@ import {
  * portrait, primary CTAs, and social icon links.
  */
 export default function Hero() {
-  const hasResume = personalInfo.resume !== null;
+  const hasResume = personalInfo.resumeDownload !== null;
 
   return (
     <section
@@ -73,29 +73,30 @@ export default function Hero() {
               Contact Me
             </a>
 
-            {/* TODO: when `personalInfo.resume` becomes "/resume.pdf",
-                this switches from a disabled chip to a real download link. */}
-            {hasResume ? (
+            {/* Resume: primary download + secondary view (Google Drive links). */}
+            {hasResume && (
               <a
-                href={personalInfo.resume!}
-                download
+                href={personalInfo.resumeDownload!}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:border-accent hover:text-accent"
               >
                 <DownloadIcon className="h-4 w-4" />
                 Download Resume
+                <span className="sr-only">(opens in a new tab)</span>
               </a>
-            ) : (
-              <span
-                aria-disabled="true"
-                title="Resume coming soon"
-                className="inline-flex cursor-not-allowed items-center gap-2 rounded-full border border-dashed border-border px-6 py-3 text-sm font-semibold text-muted-foreground/70"
+            )}
+            {personalInfo.resumeView !== null && (
+              <a
+                href={personalInfo.resumeView}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-accent"
               >
-                <DownloadIcon className="h-4 w-4" />
-                Download Resume
-                <span className="font-mono text-[10px] uppercase tracking-wider">
-                  soon
-                </span>
-              </span>
+                View Resume
+                <ArrowUpRightIcon className="h-3.5 w-3.5" />
+                <span className="sr-only">(opens in a new tab)</span>
+              </a>
             )}
           </div>
 

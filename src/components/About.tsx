@@ -2,8 +2,18 @@ import { aboutContent } from "@/data/portfolio";
 import Section from "./Section";
 import Reveal from "./Reveal";
 
-/** About: foundation copy + a quick-facts list for scannability. */
+/** About — three parts (journey / enjoy building / beyond code) + quick facts. */
 export default function About() {
+  const parts = [
+    { id: "journey", title: "My journey", text: aboutContent.journey },
+    {
+      id: "enjoy",
+      title: "What I enjoy building",
+      text: aboutContent.enjoyBuilding,
+    },
+    { id: "beyond", title: "Beyond code", text: aboutContent.beyondCode },
+  ];
+
   return (
     <Section
       id="about"
@@ -13,14 +23,16 @@ export default function About() {
       lede="A little background on who I am and how I work."
     >
       <div className="grid gap-10 md:grid-cols-[1.4fr_1fr]">
-        <Reveal className="space-y-5">
-          {aboutContent.paragraphs.map((paragraph) => (
-            <p
-              key={paragraph.slice(0, 32)}
-              className="leading-relaxed text-muted-foreground"
-            >
-              {paragraph}
-            </p>
+        <Reveal className="space-y-8">
+          {parts.map((part) => (
+            <div key={part.id}>
+              <h3 className="text-lg font-semibold tracking-tight text-foreground">
+                {part.title}
+              </h3>
+              <p className="mt-2 leading-relaxed text-muted-foreground">
+                {part.text}
+              </p>
+            </div>
           ))}
         </Reveal>
 

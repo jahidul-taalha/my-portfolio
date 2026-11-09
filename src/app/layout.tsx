@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { personalInfo } from "@/data/portfolio";
 
 const geistSans = Geist({
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
     template: `%s — ${personalInfo.fullName}`,
   },
   description: personalInfo.headline,
+  alternates: { canonical: "/" },
   keywords: [
     personalInfo.role,
     "React.js",
@@ -75,6 +77,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Navbar />
         {/* The page provides <main id="main"> as the skip-link target. */}
         <div className="flex-1">{children}</div>
+        {/* Footer lives in the layout so project detail pages get it too. */}
+        <Footer />
       </body>
     </html>
   );

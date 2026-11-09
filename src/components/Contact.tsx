@@ -3,16 +3,18 @@ import Section from "./Section";
 import Reveal from "./Reveal";
 import {
   ArrowUpRightIcon,
+  FileTextIcon,
   GithubIcon,
   LinkedinIcon,
   MailIcon,
   MapPinIcon,
   PhoneIcon,
+  WhatsappIcon,
 } from "./icons";
 
 /**
- * Contact — real mailto:/tel:/external links only. No fake form or
- * backend; email & phone are TODO placeholders until filled in the data file.
+ * Contact — real mailto:/tel:/WhatsApp/external links only. No fake form
+ * or backend; all values come from the data file.
  */
 export default function Contact() {
   const links = [
@@ -31,6 +33,22 @@ export default function Contact() {
       href: `tel:${personalInfo.phone.replace(/[^+\d]/g, "")}`,
       icon: <PhoneIcon className="h-5 w-5" />,
       external: false,
+    },
+    {
+      id: "whatsapp",
+      label: "WhatsApp",
+      value: "Chat on WhatsApp",
+      href: personalInfo.whatsapp,
+      icon: <WhatsappIcon className="h-5 w-5" />,
+      external: true,
+    },
+    {
+      id: "resume",
+      label: "Resume",
+      value: "View my resume",
+      href: personalInfo.resumeView,
+      icon: <FileTextIcon className="h-5 w-5" />,
+      external: true,
     },
     {
       id: "github",

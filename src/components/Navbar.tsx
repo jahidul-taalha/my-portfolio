@@ -32,7 +32,7 @@ export default function Navbar() {
       >
         {/* Wordmark: preferred name + role in mono for a personal touch */}
         <Link
-          href="#top"
+          href="/#top"
           className="group flex items-baseline gap-2 font-semibold tracking-tight text-foreground"
         >
           <span className="text-lg">
